@@ -147,7 +147,7 @@ public class BeanGame extends Application{
 		primaryStage.show(); // Display the stage
 	}	
 	
-	//this method 
+	//this method is the ball's path and decide where it can roll
 	public void pathh(Node circle , int x , int y){
 		
 		//local varaible to define a new variable and change it's value 
