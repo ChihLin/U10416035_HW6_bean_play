@@ -152,7 +152,7 @@ public class BeanGame extends Application{
 		
 		//local varaible to define a new variable and change it's value 
 		int xx = x ;
-		int	yy = y;
+		int yy = y;
 		//new a peth object
 		Path path = new Path();
 		
@@ -163,7 +163,7 @@ public class BeanGame extends Application{
 		for(int i = 1 ; i < 8 ; i++){
 			
 			int random = (int) (Math.random()*2+1);	
-			//mew a lineto and moveto to decide it's seat
+			//new a lineto and moveto to decide it's seat
 			LineTo lineto  = new LineTo(xx,yy+=20);
 			path.getElements().add(lineto);
 			path.getElements().add(new MoveTo(xx,yy));
@@ -187,7 +187,7 @@ public class BeanGame extends Application{
 		pt.setDuration(Duration.millis(1000));	
 		pt.setPath(path);
 		pt.setNode(circle);
-    pt.setAutoReverse(false);
+    		pt.setAutoReverse(false);
 		//Start the animation
 		pt.play();		
 	}
