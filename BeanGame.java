@@ -21,19 +21,9 @@ public class BeanGame extends Application{
 
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) {
-		
-		
-	
 		//add the line of the shape
 		Polyline line = new Polyline();
-		line.getPoints().addAll(155d,40d,155d,60d,70d,195d,70d,230d);
-		
-		Polyline line2 = new Polyline();
-		line2.getPoints().addAll(175d,40d,175d,60d,260d,195d,260d,230d);
-		
-		Polyline line3 = new Polyline();
-		line3.getPoints().addAll(70d,230d,260d,230d);
-		
+		line.getPoints().addAll(155d,40d,155d,60d,70d,195d,70d,230d,260d,230d,260d,195d,175d,60d,175d,40d,70d);
 		
 		// add the ball of the shape
 		Circle c = new Circle(5);
@@ -64,7 +54,6 @@ public class BeanGame extends Application{
 		c12.relocate(160d,150d);
 		Circle c13 = new Circle(5);
 		c13.relocate(184d,150d);
-
 		Circle c14 = new Circle(5);
 		c14.relocate(208d,150d);
 		Circle c15 = new Circle(5);
@@ -93,8 +82,7 @@ public class BeanGame extends Application{
 		c26.relocate(208d,190d);
 		Circle c27 = new Circle(5);
 		c27.relocate(232d,190d);
-		
-		
+				
 		//add the bottom line of the bean game
 		Polyline line4 = new Polyline();
 		line4.getPoints().addAll(93d,190d,93d,230d);
@@ -113,22 +101,13 @@ public class BeanGame extends Application{
 		
 		//to new a group (children)
 		Group g = new Group();
-		
-		//to add the all line into the shape
-		g.getChildren().add(line);
-		g.getChildren().add(line2);
-		g.getChildren().add(line3);
-		g.getChildren().addAll(line4,line5,line6,line7,line8,line9,line10);
-		
-		//add the circle into the shape
-		g.getChildren().addAll(c,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27);
-		
+		//to add the all line into the shape and add the ball
+		g.getChildren().addAll(line,line4,line5,line6,line7,line8,line9,line10,c,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27);	
 		//Create a scene and place it in the stage
 		Scene scene = new Scene(g, 330, 250);
 		
 		//when the user click the scene will run the function
-		scene.setOnMouseClicked (e -> {
-			
+		scene.setOnMouseClicked (e -> {		
 			//decide the rolling ball's seat and radius
 			int x =165,y=55;
 			int radius =4;
@@ -138,21 +117,18 @@ public class BeanGame extends Application{
 			circle.setFill(Color.BLUE);
 			g.getChildren().add(circle);
 			
-			//run the path() method
+			//run the pathh() method (this method is decide it's path)
 			pathh(circle,x,y);
 		});
-		
 		primaryStage.setTitle("Beam Game"); // Set title
 		primaryStage.setScene(scene); // Place the scene in the stage
 		primaryStage.show(); // Display the stage
-	}	
-	
-	//this method is the ball's path and decide where it can roll
+	}
 	public void pathh(Node circle , int x , int y){
 		
 		//local varaible to define a new variable and change it's value 
 		int xx = x ;
-		int yy = y;
+		int	yy = y;
 		//new a peth object
 		Path path = new Path();
 		
@@ -163,37 +139,29 @@ public class BeanGame extends Application{
 		for(int i = 1 ; i < 8 ; i++){
 			
 			int random = (int) (Math.random()*2+1);	
-			//new a lineto and moveto to decide it's seat
+			//mew a lineto and moveto to decide it's seat
 			LineTo lineto  = new LineTo(xx,yy+=20);
 			path.getElements().add(lineto);
 			path.getElements().add(new MoveTo(xx,yy));
 			
 			//use random to decide the ball will go right or left
 			if(random == 1){
-				
 				path.getElements().add(new LineTo(xx+=11.5,yy));
-			}
-			
+			}			
 			else{
-				
 				path.getElements().add(new LineTo(xx-=11.5,yy));
 			}
 		}
 		//let the ball go to down
-		path.getElements().add(new LineTo(xx, yy+=30));
-		
+		path.getElements().add(new LineTo(xx, yy+=30));		
 		//use the pathtransition to decide the ball 's duration , path and node and to play the function
 		PathTransition pt = new PathTransition();
 		pt.setDuration(Duration.millis(1000));	
 		pt.setPath(path);
 		pt.setNode(circle);
-    		pt.setAutoReverse(false);
 		//Start the animation
 		pt.play();		
 	}
-	
-	
-
   public static void main(String[] args) {
     launch(args);
   }
